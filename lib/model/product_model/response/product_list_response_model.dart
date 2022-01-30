@@ -7,7 +7,7 @@ part 'product_list_response_model.g.dart';
 
 @JsonSerializable()
 class ProductListResponseModel extends INetworkModel<ProductListResponseModel> {
-  List<Product>? data;
+  List<Data>? data;
   bool? success;
   String? message;
 

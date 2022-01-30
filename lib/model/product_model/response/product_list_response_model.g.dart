@@ -10,7 +10,7 @@ ProductListResponseModel _$ProductListResponseModelFromJson(
         Map<String, dynamic> json) =>
     ProductListResponseModel(
       data: (json['data'] as List<dynamic>?)
-          ?.map((e) => Product.fromJson(e as Map<String, dynamic>))
+          ?.map((e) => Data.fromJson(e as Map<String, dynamic>))
           .toList(),
       success: json['success'] as bool?,
       message: json['message'] as String?,

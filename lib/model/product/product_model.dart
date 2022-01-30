@@ -1,27 +1,23 @@
-class Product {
+import 'package:json_annotation/json_annotation.dart';
+import 'package:vexana/vexana.dart';
+
+part 'product_model.g.dart';
+
+@JsonSerializable()
+class Data extends INetworkModel<Data> {
   int? productId;
   int? categoryId;
   String? productName;
   int? unitsInStock;
   double? unitPrice;
 
-  Product({this.productId, this.categoryId, this.productName, this.unitsInStock, this.unitPrice});
+  Data({this.productId, this.categoryId, this.productName, this.unitsInStock, this.unitPrice});
 
-  Product.fromJson(Map<String, dynamic> json) {
-    productId = json['productId'];
-    categoryId = json['categoryId'];
-    productName = json['productName'];
-    unitsInStock = json['unitsInStock'];
-    unitPrice = json['unitPrice'];
-  }
+  factory Data.fromJson(Map<String, dynamic> json) => _$DataFromJson(json);
+  Map<String, dynamic> toJson() => _$DataToJson(this);
 
-  Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['productId'] = this.productId;
-    data['categoryId'] = this.categoryId;
-    data['productName'] = this.productName;
-    data['unitsInStock'] = this.unitsInStock;
-    data['unitPrice'] = this.unitPrice;
-    return data;
+  @override
+  Data fromJson(Map<String, dynamic> json) {
+    return _$DataFromJson(json);
   }
 }
