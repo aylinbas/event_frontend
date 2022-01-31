@@ -9,11 +9,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Material App',
-      home: Scaffold(
-          appBar: AppBar(
-            title: Text('Sample Project'),
-          ),
-          body: ProductScreen()),
+      home: Scaffold(body: ProductScreen()),
     );
   }
 }

@@ -23,10 +23,10 @@ class ProductScreenCubit extends Cubit<ProductScreenState> {
     }
   }
 
-  Future<void> getById(AddProductRequestModel data) async {
+  Future<void> addItem(AddProductRequestModel data) async {
     emit(ProductScreenLoading());
     try {
-      final response = await repository.getProductsById(data);
+      final response = await repository.addItem(data);
       emit(ProductScreenCompleted(response));
     } catch (e) {
       emit(ProductScreenStateError(e.toString()));
