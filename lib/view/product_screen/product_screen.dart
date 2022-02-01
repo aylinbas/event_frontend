@@ -1,12 +1,11 @@
-import 'package:event_frontend/core/constants/image_constants.dart';
-import 'package:event_frontend/model/add_product/request/add_product_request_model.dart';
-import 'package:event_frontend/model/add_product/response/add_product_response_model.dart';
-import 'package:event_frontend/view/product_screen/add_item_screen.dart';
-import 'package:event_frontend/view/widgets/product_info_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/svg.dart';
+
 import '../../../model/product_model/response/product_list_response_model.dart';
+import '../../core/constants/image_constants.dart';
+import '../widgets/product_info_widget.dart';
+import 'add_item_screen.dart';
 import 'cubit/product_screen_cubit.dart';
 
 class ProductScreen extends StatelessWidget {
@@ -14,10 +13,6 @@ class ProductScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final nameController = TextEditingController();
-    final priceController = TextEditingController();
-    final categoryController = TextEditingController();
-    final stockController = TextEditingController();
     return Scaffold(
       body: BlocProvider(
         create: (context) => ProductScreenCubit(),
@@ -31,8 +26,7 @@ class ProductScreen extends StatelessWidget {
               return Center(child: CircularProgressIndicator());
             } else if (state is ProductScreenCompleted) {
               ProductListResponseModel response = state.response.data;
-              return productList(
-                  context, nameController, priceController, categoryController, stockController, response);
+              return productList(context, response);
             } else if (state is ProductScreenStateError) {
               return Container(
                 child: Text(state.message),
@@ -46,13 +40,7 @@ class ProductScreen extends StatelessWidget {
     );
   }
 
-  Container productList(
-      BuildContext context,
-      TextEditingController nameController,
-      TextEditingController priceController,
-      TextEditingController categoryController,
-      TextEditingController stockController,
-      ProductListResponseModel response) {
+  Container productList(BuildContext context, ProductListResponseModel response) {
     return Container(
         padding: EdgeInsets.all(30),
         child: Column(
@@ -100,8 +88,6 @@ class ProductScreen extends StatelessWidget {
                 style: TextStyle(color: Color.fromRGBO(165, 165, 165, 1)),
               ),
             ),
-
-            // addProduct(context, nameController, priceController, categoryController, stockController),
             Expanded(
               child: ListView.builder(
                   itemCount: response.data?.length,
